@@ -1,0 +1,51 @@
+//製品の検査と製造記録管理プログラム
+
+import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        LocalDate today = LocalDate.now();
+        List<Integer> pointList = new ArrayList<>();
+        List<LocalDate> dayOkList = new ArrayList<>();
+        List<LocalDate> dayNgList = new ArrayList<>();
+        List<String> lotOkList = new ArrayList<>();
+        List<String> lotNgList = new ArrayList<>();
+        int count = sc.nextInt();
+        int total = 0;
+        int avg = 0;
+        
+        System.out.println("ロットナンバーを入力してください。");
+        String lotNumber = sc.nextLine();                                           //ロットナンバーを入力
+        System.out.println("３回分のテストの点数を入力してください。"); 
+        int point = sc.nextInt();
+        
+        for (int i = 0; i < count; i++) {                                           //リストに点数を追加する                              
+            pointList.add(point);                                                   //3回分のテストの点数を入力
+        }
+        for (int i : pointList) {                                                   //点数を合計する
+            total += i;
+        }
+        avg = total / count;                                                            //平均点を出す
+        
+        System.out.println("合計点は" + total + "点平均点は" + avg + "点です。");   //合計点と平均点を出力
+        
+        if (avg >= 80) {                                                            //平均点が８０点以上なら
+            System.out.println("合格");                                             //合格と出力し、
+            dayOkList.add(today);                                                   //合格の日付をとロットナンバーをそれぞれのリストに追加
+            lotOkList.add(lotNumber);
+        } else {                                                                    //不合格なら、
+            System.out.println("不合格");                                           //不合格と出力し、
+            dayNgList.add(today);                                                   //不合格の日付をとロットナンバーをそれぞれのリストに追加
+            lotNgList.add(lotNumber);
+        }
+        System.out.println("合格した製品のロットと製造年月日一覧");
+        System.out.println(lotOkList);
+        System.out.println(dayOkList);
+        System.out.println("不合格となった製品のロットと製造年月日一覧");
+        System.out.println(lotOkList);
+        System.out.println(dayNgList);
+    }
+}
