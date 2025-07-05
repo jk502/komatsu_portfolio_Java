@@ -1,0 +1,74 @@
+//天気予報シミュレーションプログラム
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        String[] weather = {"はれ", "くもり", "あめ"};  //天気を表す配列
+        
+        int weatherIndex = (int)(Math.random() * weather.length);   //天気がランダムに選ばれるようにするために、
+        String todayWeather = weather[weatherIndex];                //weatherの要素番号をランダムに生成し、todayWeatherに代入
+        
+        double spr = Math.random() * 3;                             //天気ごとに降水確率を設定（確率は乱数で決定）
+        int sun_percent_rain = (int)(spr * 10);           //はれの時の降水確率(０％～２０％)
+        
+        double cpr = Math.random() * 4 + 3;
+        int cloud_percent_rain = (int)(cpr * 10);         //くもりの時の降水確率(３０％～６０％)
+        
+        double rpr = Math.random() * 3 + 8;
+        int rainy_percent_rain = (int)(rpr * 10);         //あめの時の降水確率(７０％～１００％)
+        
+        double ht = Math.random() * 5 + 30;             //最高気温（確率は５℃～３５℃の間で乱数で決定）
+        int high_temperature = (int)ht;                 
+        double lt = Math.random() * 4 + 3;              //最低気温（確率は最高気温から３℃～６℃引いた数値を乱数で決定）
+        int low_temperature = high_temperature - (int)lt;        
+        
+        System.out.println("おはようございます。天気予報をお伝えします。");
+        System.out.println("今日の上越市の天気は、" + weather[weatherIndex] + "です。");
+        
+        if (weather[weatherIndex].equals(weather[0])) {                                                                              //はれの時の処理内容
+            System.out.println("降水確率は" + sun_percent_rain + "％");
+            System.out.println("傘は必要なさそうです。");
+            System.out.print("最高気温は" + high_temperature + "℃、");
+            System.out.println("最低気温は" + low_temperature + "℃です。");
+                                                                                                                                //最高気温に応じてコメントを変化
+            if (high_temperature <= 15) {                                                                                       //15℃以下の場合のコメント
+                System.out.println("日差しはありますが、空気が乾燥しています。うがい、手洗い、マスクを忘れずにしましょう。");  
+            } else if (high_temperature <= 24) {                                                                                //24℃以下の場合のコメント
+                System.out.println("暖かく、一日中快適に過ごせそうです。");
+            } else {                                                                                                            //25℃以上の場合のコメント
+                System.out.println("日差しが強いため、暑くなりそうです。熱中症対策をしましょう。");
+            }
+        } else if (weather[weatherIndex].equals(weather[1])) {                                                                  //くもりの時の処理内容
+            System.out.println("降水確率は" + cloud_percent_rain + "％");                                                       
+            if (cloud_percent_rain <= 40) {                                                                                     //くもりの時は降水確率が40％以下と
+                System.out.println("傘の心配はなさそうです。");                                                                 //60%の場合で傘が必要か、
+            } else if (cloud_percent_rain <= 60) {                                                                              //コメントを変化させる
+                System.out.println("傘を用意しておくと良さそうです。");
+            }
+            System.out.print("最高気温は" + high_temperature + "℃、");
+            System.out.println("最低気温は" + low_temperature + "℃です。");                                                     //最高気温に応じてコメントを変化
+            if (high_temperature <= 15) {                                                                                       //15℃以下の場合のコメント
+                System.out.println("日差しが届かず、肌寒く感じるでしょう。あたたかい服装でお出かけください。");
+            } else if (high_temperature <= 24) {                                                                                //24℃以下の場合のコメント
+                System.out.println("長袖や上着が１枚あると良さそうです。");
+            } else {                                                                                                            //25℃以上の場合のコメント
+                System.out.println("日差しはあまりありませんが、湿気が多いでしょう。水分補給も忘れずに。");
+            }
+        } else {                                                                                                                //あめの時の処理内容
+            System.out.println("降水確率は" + rainy_percent_rain + "％");
+            System.out.println("傘が必要です。");
+            System.out.print("最高気温は" + high_temperature + "℃、");
+            System.out.println("最低気温は" + low_temperature + "℃です。");                                                     //最高気温に応じてコメントを変化
+            if (high_temperature <= 15) {                                                                                       //15℃以下の場合のコメント
+                System.out.println("体感的に少し肌寒く感じるでしょう。");
+            } else if (high_temperature <= 24) {                                                                                //24℃以下の場合のコメント
+                System.out.println("湿気が多く、洗濯物が乾きにくい１日になりそうです。");
+            } else {                                                                                                            //25℃以上の場合のコメント
+                System.out.println("ジメジメと蒸し暑い１日になりそうです。");
+            }
+        }
+        
+        System.out.println("以上、天気予報でした。今日も元気に行ってらっしゃい！");
+    }
+}
