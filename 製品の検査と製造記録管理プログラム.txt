@@ -23,7 +23,7 @@ public class Main {
         int point = sc.nextInt();
         
         for (int i = 0; i < count; i++) {                                           //リストに点数を追加する                              
-            pointList.add(point);                                                   //3回分のテストの点数を入力
+            pointList.add(point);                                                   //3回分のテストの点数を追加
         }
         for (int i : pointList) {                                                   //点数を合計する
             total += i;
